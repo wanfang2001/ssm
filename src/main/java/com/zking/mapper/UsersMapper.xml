@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.UsersMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Users" >
+    <constructor >
+      <idArg column="t_users_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_users_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_users_password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_users_sale" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_users_createdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_users_id, t_users_name, t_users_password, t_users_sale, t_users_createdate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jz_users
+    where t_users_id = #{tUsersId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jz_users
+    where t_users_id = #{tUsersId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Users" >
+    insert into t_jz_users (t_users_id, t_users_name, t_users_password, 
+      t_users_sale, t_users_createdate)
+    values (#{tUsersId,jdbcType=INTEGER}, #{tUsersName,jdbcType=VARCHAR}, #{tUsersPassword,jdbcType=VARCHAR}, 
+      #{tUsersSale,jdbcType=VARCHAR}, #{tUsersCreatedate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Users" >
+    insert into t_jz_users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tUsersId != null" >
+        t_users_id,
+      </if>
+      <if test="tUsersName != null" >
+        t_users_name,
+      </if>
+      <if test="tUsersPassword != null" >
+        t_users_password,
+      </if>
+      <if test="tUsersSale != null" >
+        t_users_sale,
+      </if>
+      <if test="tUsersCreatedate != null" >
+        t_users_createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tUsersId != null" >
+        #{tUsersId,jdbcType=INTEGER},
+      </if>
+      <if test="tUsersName != null" >
+        #{tUsersName,jdbcType=VARCHAR},
+      </if>
+      <if test="tUsersPassword != null" >
+        #{tUsersPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tUsersSale != null" >
+        #{tUsersSale,jdbcType=VARCHAR},
+      </if>
+      <if test="tUsersCreatedate != null" >
+        #{tUsersCreatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Users" >
+    update t_jz_users
+    <set >
+      <if test="tUsersName != null" >
+        t_users_name = #{tUsersName,jdbcType=VARCHAR},
+      </if>
+      <if test="tUsersPassword != null" >
+        t_users_password = #{tUsersPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tUsersSale != null" >
+        t_users_sale = #{tUsersSale,jdbcType=VARCHAR},
+      </if>
+      <if test="tUsersCreatedate != null" >
+        t_users_createdate = #{tUsersCreatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where t_users_id = #{tUsersId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Users" >
+    update t_jz_users
+    set t_users_name = #{tUsersName,jdbcType=VARCHAR},
+      t_users_password = #{tUsersPassword,jdbcType=VARCHAR},
+      t_users_sale = #{tUsersSale,jdbcType=VARCHAR},
+      t_users_createdate = #{tUsersCreatedate,jdbcType=TIMESTAMP}
+    where t_users_id = #{tUsersId,jdbcType=INTEGER}
+  </update>
+</mapper>

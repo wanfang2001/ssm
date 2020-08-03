@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.BusinessMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Business" >
+    <constructor >
+      <idArg column="t_business_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_business_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_business_id, t_business_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jz_business
+    where t_business_id = #{tBusinessId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jz_business
+    where t_business_id = #{tBusinessId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Business" >
+    insert into t_jz_business (t_business_id, t_business_name)
+    values (#{tBusinessId,jdbcType=INTEGER}, #{tBusinessName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Business" >
+    insert into t_jz_business
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tBusinessId != null" >
+        t_business_id,
+      </if>
+      <if test="tBusinessName != null" >
+        t_business_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tBusinessId != null" >
+        #{tBusinessId,jdbcType=INTEGER},
+      </if>
+      <if test="tBusinessName != null" >
+        #{tBusinessName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Business" >
+    update t_jz_business
+    <set >
+      <if test="tBusinessName != null" >
+        t_business_name = #{tBusinessName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_business_id = #{tBusinessId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Business" >
+    update t_jz_business
+    set t_business_name = #{tBusinessName,jdbcType=VARCHAR}
+    where t_business_id = #{tBusinessId,jdbcType=INTEGER}
+  </update>
+</mapper>

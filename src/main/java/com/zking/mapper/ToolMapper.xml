@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.ToolMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Tool" >
+    <constructor >
+      <idArg column="t_tool_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_tool_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_tool_count" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_tool_id, t_tool_name, t_tool_count
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jz_tool
+    where t_tool_id = #{tToolId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jz_tool
+    where t_tool_id = #{tToolId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Tool" >
+    insert into t_jz_tool (t_tool_id, t_tool_name, t_tool_count
+      )
+    values (#{tToolId,jdbcType=INTEGER}, #{tToolName,jdbcType=VARCHAR}, #{tToolCount,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Tool" >
+    insert into t_jz_tool
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tToolId != null" >
+        t_tool_id,
+      </if>
+      <if test="tToolName != null" >
+        t_tool_name,
+      </if>
+      <if test="tToolCount != null" >
+        t_tool_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tToolId != null" >
+        #{tToolId,jdbcType=INTEGER},
+      </if>
+      <if test="tToolName != null" >
+        #{tToolName,jdbcType=VARCHAR},
+      </if>
+      <if test="tToolCount != null" >
+        #{tToolCount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Tool" >
+    update t_jz_tool
+    <set >
+      <if test="tToolName != null" >
+        t_tool_name = #{tToolName,jdbcType=VARCHAR},
+      </if>
+      <if test="tToolCount != null" >
+        t_tool_count = #{tToolCount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_tool_id = #{tToolId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Tool" >
+    update t_jz_tool
+    set t_tool_name = #{tToolName,jdbcType=VARCHAR},
+      t_tool_count = #{tToolCount,jdbcType=VARCHAR}
+    where t_tool_id = #{tToolId,jdbcType=INTEGER}
+  </update>
+</mapper>

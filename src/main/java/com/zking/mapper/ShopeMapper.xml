@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.ShopeMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Shope" >
+    <constructor >
+      <idArg column="t_shope_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_shope_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_shope_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_shope_createdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_shope_id, t_shope_name, t_shope_address, t_shope_createdate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jz_shope
+    where t_shope_id = #{tShopeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jz_shope
+    where t_shope_id = #{tShopeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Shope" >
+    insert into t_jz_shope (t_shope_id, t_shope_name, t_shope_address, 
+      t_shope_createdate)
+    values (#{tShopeId,jdbcType=INTEGER}, #{tShopeName,jdbcType=VARCHAR}, #{tShopeAddress,jdbcType=VARCHAR}, 
+      #{tShopeCreatedate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Shope" >
+    insert into t_jz_shope
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tShopeId != null" >
+        t_shope_id,
+      </if>
+      <if test="tShopeName != null" >
+        t_shope_name,
+      </if>
+      <if test="tShopeAddress != null" >
+        t_shope_address,
+      </if>
+      <if test="tShopeCreatedate != null" >
+        t_shope_createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tShopeId != null" >
+        #{tShopeId,jdbcType=INTEGER},
+      </if>
+      <if test="tShopeName != null" >
+        #{tShopeName,jdbcType=VARCHAR},
+      </if>
+      <if test="tShopeAddress != null" >
+        #{tShopeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tShopeCreatedate != null" >
+        #{tShopeCreatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Shope" >
+    update t_jz_shope
+    <set >
+      <if test="tShopeName != null" >
+        t_shope_name = #{tShopeName,jdbcType=VARCHAR},
+      </if>
+      <if test="tShopeAddress != null" >
+        t_shope_address = #{tShopeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tShopeCreatedate != null" >
+        t_shope_createdate = #{tShopeCreatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where t_shope_id = #{tShopeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Shope" >
+    update t_jz_shope
+    set t_shope_name = #{tShopeName,jdbcType=VARCHAR},
+      t_shope_address = #{tShopeAddress,jdbcType=VARCHAR},
+      t_shope_createdate = #{tShopeCreatedate,jdbcType=TIMESTAMP}
+    where t_shope_id = #{tShopeId,jdbcType=INTEGER}
+  </update>
+</mapper>

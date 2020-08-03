@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.StaffBusinessMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.StaffBusiness" >
+    <constructor >
+      <idArg column="t_sb_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_team_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_business_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_sb_id, t_team_id, t_business_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_staff_business
+    where t_sb_id = #{tSbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_staff_business
+    where t_sb_id = #{tSbId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.StaffBusiness" >
+    insert into t_staff_business (t_sb_id, t_team_id, t_business_id
+      )
+    values (#{tSbId,jdbcType=INTEGER}, #{tTeamId,jdbcType=INTEGER}, #{tBusinessId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.StaffBusiness" >
+    insert into t_staff_business
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tSbId != null" >
+        t_sb_id,
+      </if>
+      <if test="tTeamId != null" >
+        t_team_id,
+      </if>
+      <if test="tBusinessId != null" >
+        t_business_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tSbId != null" >
+        #{tSbId,jdbcType=INTEGER},
+      </if>
+      <if test="tTeamId != null" >
+        #{tTeamId,jdbcType=INTEGER},
+      </if>
+      <if test="tBusinessId != null" >
+        #{tBusinessId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.StaffBusiness" >
+    update t_staff_business
+    <set >
+      <if test="tTeamId != null" >
+        t_team_id = #{tTeamId,jdbcType=INTEGER},
+      </if>
+      <if test="tBusinessId != null" >
+        t_business_id = #{tBusinessId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where t_sb_id = #{tSbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.StaffBusiness" >
+    update t_staff_business
+    set t_team_id = #{tTeamId,jdbcType=INTEGER},
+      t_business_id = #{tBusinessId,jdbcType=INTEGER}
+    where t_sb_id = #{tSbId,jdbcType=INTEGER}
+  </update>
+</mapper>
