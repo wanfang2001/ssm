@@ -7,10 +7,11 @@
       <arg column="t_per_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="t_pid" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="t_per_permission" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_url" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    t_per_id, t_per_name, t_pid, t_per_permission
+    t_per_id, t_per_name, t_pid, t_per_permission, t_url
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,9 +25,9 @@
   </delete>
   <insert id="insert" parameterType="com.zking.model.Permission" >
     insert into t_jz_permission (t_per_id, t_per_name, t_pid, 
-      t_per_permission)
+      t_per_permission, t_url)
     values (#{tPerId,jdbcType=INTEGER}, #{tPerName,jdbcType=VARCHAR}, #{tPid,jdbcType=INTEGER}, 
-      #{tPerPermission,jdbcType=VARCHAR})
+      #{tPerPermission,jdbcType=VARCHAR}, #{tUrl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zking.model.Permission" >
     insert into t_jz_permission
@@ -43,6 +44,9 @@
       <if test="tPerPermission != null" >
         t_per_permission,
       </if>
+      <if test="tUrl != null" >
+        t_url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tPerId != null" >
@@ -56,6 +60,9 @@
       </if>
       <if test="tPerPermission != null" >
         #{tPerPermission,jdbcType=VARCHAR},
+      </if>
+      <if test="tUrl != null" >
+        #{tUrl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -71,6 +78,9 @@
       <if test="tPerPermission != null" >
         t_per_permission = #{tPerPermission,jdbcType=VARCHAR},
       </if>
+      <if test="tUrl != null" >
+        t_url = #{tUrl,jdbcType=VARCHAR},
+      </if>
     </set>
     where t_per_id = #{tPerId,jdbcType=INTEGER}
   </update>
@@ -78,7 +88,8 @@
     update t_jz_permission
     set t_per_name = #{tPerName,jdbcType=VARCHAR},
       t_pid = #{tPid,jdbcType=INTEGER},
-      t_per_permission = #{tPerPermission,jdbcType=VARCHAR}
+      t_per_permission = #{tPerPermission,jdbcType=VARCHAR},
+      t_url = #{tUrl,jdbcType=VARCHAR}
     where t_per_id = #{tPerId,jdbcType=INTEGER}
   </update>
 </mapper>

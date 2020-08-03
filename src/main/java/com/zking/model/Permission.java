@@ -9,11 +9,14 @@ public class Permission {
 
     private String tPerPermission;
 
-    public Permission(Integer tPerId, String tPerName, Integer tPid, String tPerPermission) {
+    private String tUrl;
+
+    public Permission(Integer tPerId, String tPerName, Integer tPid, String tPerPermission, String tUrl) {
         this.tPerId = tPerId;
         this.tPerName = tPerName;
         this.tPid = tPid;
         this.tPerPermission = tPerPermission;
+        this.tUrl = tUrl;
     }
 
     public Permission() {
@@ -50,5 +53,13 @@ public class Permission {
 
     public void settPerPermission(String tPerPermission) {
         this.tPerPermission = tPerPermission;
+    }
+
+    public String gettUrl() {
+        return tUrl;
+    }
+
+    public void settUrl(String tUrl) {
+        this.tUrl = tUrl;
     }
 }

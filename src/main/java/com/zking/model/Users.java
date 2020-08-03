@@ -13,12 +13,15 @@ public class Users {
 
     private Date tUsersCreatedate;
 
-    public Users(Integer tUsersId, String tUsersName, String tUsersPassword, String tUsersSale, Date tUsersCreatedate) {
+    private Integer tUsersZt;
+
+    public Users(Integer tUsersId, String tUsersName, String tUsersPassword, String tUsersSale, Date tUsersCreatedate, Integer tUsersZt) {
         this.tUsersId = tUsersId;
         this.tUsersName = tUsersName;
         this.tUsersPassword = tUsersPassword;
         this.tUsersSale = tUsersSale;
         this.tUsersCreatedate = tUsersCreatedate;
+        this.tUsersZt = tUsersZt;
     }
 
     public Users() {
@@ -63,5 +66,13 @@ public class Users {
 
     public void settUsersCreatedate(Date tUsersCreatedate) {
         this.tUsersCreatedate = tUsersCreatedate;
+    }
+
+    public Integer gettUsersZt() {
+        return tUsersZt;
+    }
+
+    public void settUsersZt(Integer tUsersZt) {
+        this.tUsersZt = tUsersZt;
     }
 }
