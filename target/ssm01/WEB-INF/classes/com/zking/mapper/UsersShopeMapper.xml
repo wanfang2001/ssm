@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.UsersShopeMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.UsersShope" >
+    <constructor >
+      <idArg column="t_ms_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_users_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_shope_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_ms_id, t_users_id, t_shope_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_users_shope
+    where t_ms_id = #{tMsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_users_shope
+    where t_ms_id = #{tMsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.UsersShope" >
+    insert into t_users_shope (t_ms_id, t_users_id, t_shope_id
+      )
+    values (#{tMsId,jdbcType=INTEGER}, #{tUsersId,jdbcType=INTEGER}, #{tShopeId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.UsersShope" >
+    insert into t_users_shope
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tMsId != null" >
+        t_ms_id,
+      </if>
+      <if test="tUsersId != null" >
+        t_users_id,
+      </if>
+      <if test="tShopeId != null" >
+        t_shope_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tMsId != null" >
+        #{tMsId,jdbcType=INTEGER},
+      </if>
+      <if test="tUsersId != null" >
+        #{tUsersId,jdbcType=INTEGER},
+      </if>
+      <if test="tShopeId != null" >
+        #{tShopeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.UsersShope" >
+    update t_users_shope
+    <set >
+      <if test="tUsersId != null" >
+        t_users_id = #{tUsersId,jdbcType=INTEGER},
+      </if>
+      <if test="tShopeId != null" >
+        t_shope_id = #{tShopeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where t_ms_id = #{tMsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.UsersShope" >
+    update t_users_shope
+    set t_users_id = #{tUsersId,jdbcType=INTEGER},
+      t_shope_id = #{tShopeId,jdbcType=INTEGER}
+    where t_ms_id = #{tMsId,jdbcType=INTEGER}
+  </update>
+</mapper>

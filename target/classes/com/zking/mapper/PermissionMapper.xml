@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Permission" >
+    <constructor >
+      <idArg column="t_per_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_per_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_pid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_per_permission" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_per_id, t_per_name, t_pid, t_per_permission, t_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jz_permission
+    where t_per_id = #{tPerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jz_permission
+    where t_per_id = #{tPerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Permission" >
+    insert into t_jz_permission (t_per_id, t_per_name, t_pid, 
+      t_per_permission, t_url)
+    values (#{tPerId,jdbcType=INTEGER}, #{tPerName,jdbcType=VARCHAR}, #{tPid,jdbcType=INTEGER}, 
+      #{tPerPermission,jdbcType=VARCHAR}, #{tUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Permission" >
+    insert into t_jz_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tPerId != null" >
+        t_per_id,
+      </if>
+      <if test="tPerName != null" >
+        t_per_name,
+      </if>
+      <if test="tPid != null" >
+        t_pid,
+      </if>
+      <if test="tPerPermission != null" >
+        t_per_permission,
+      </if>
+      <if test="tUrl != null" >
+        t_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tPerId != null" >
+        #{tPerId,jdbcType=INTEGER},
+      </if>
+      <if test="tPerName != null" >
+        #{tPerName,jdbcType=VARCHAR},
+      </if>
+      <if test="tPid != null" >
+        #{tPid,jdbcType=INTEGER},
+      </if>
+      <if test="tPerPermission != null" >
+        #{tPerPermission,jdbcType=VARCHAR},
+      </if>
+      <if test="tUrl != null" >
+        #{tUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Permission" >
+    update t_jz_permission
+    <set >
+      <if test="tPerName != null" >
+        t_per_name = #{tPerName,jdbcType=VARCHAR},
+      </if>
+      <if test="tPid != null" >
+        t_pid = #{tPid,jdbcType=INTEGER},
+      </if>
+      <if test="tPerPermission != null" >
+        t_per_permission = #{tPerPermission,jdbcType=VARCHAR},
+      </if>
+      <if test="tUrl != null" >
+        t_url = #{tUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_per_id = #{tPerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Permission" >
+    update t_jz_permission
+    set t_per_name = #{tPerName,jdbcType=VARCHAR},
+      t_pid = #{tPid,jdbcType=INTEGER},
+      t_per_permission = #{tPerPermission,jdbcType=VARCHAR},
+      t_url = #{tUrl,jdbcType=VARCHAR}
+    where t_per_id = #{tPerId,jdbcType=INTEGER}
+  </update>
+</mapper>

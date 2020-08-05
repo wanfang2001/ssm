@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.StaffroleMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Staffrole" >
+    <constructor >
+      <idArg column="t_staffrole_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_staffrole_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_staffrole_description" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_staffrole_id, t_staffrole_name, t_staffrole_description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jz_staffrole
+    where t_staffrole_id = #{tStaffroleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jz_staffrole
+    where t_staffrole_id = #{tStaffroleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Staffrole" >
+    insert into t_jz_staffrole (t_staffrole_id, t_staffrole_name, t_staffrole_description
+      )
+    values (#{tStaffroleId,jdbcType=INTEGER}, #{tStaffroleName,jdbcType=VARCHAR}, #{tStaffroleDescription,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Staffrole" >
+    insert into t_jz_staffrole
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tStaffroleId != null" >
+        t_staffrole_id,
+      </if>
+      <if test="tStaffroleName != null" >
+        t_staffrole_name,
+      </if>
+      <if test="tStaffroleDescription != null" >
+        t_staffrole_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tStaffroleId != null" >
+        #{tStaffroleId,jdbcType=INTEGER},
+      </if>
+      <if test="tStaffroleName != null" >
+        #{tStaffroleName,jdbcType=VARCHAR},
+      </if>
+      <if test="tStaffroleDescription != null" >
+        #{tStaffroleDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Staffrole" >
+    update t_jz_staffrole
+    <set >
+      <if test="tStaffroleName != null" >
+        t_staffrole_name = #{tStaffroleName,jdbcType=VARCHAR},
+      </if>
+      <if test="tStaffroleDescription != null" >
+        t_staffrole_description = #{tStaffroleDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_staffrole_id = #{tStaffroleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Staffrole" >
+    update t_jz_staffrole
+    set t_staffrole_name = #{tStaffroleName,jdbcType=VARCHAR},
+      t_staffrole_description = #{tStaffroleDescription,jdbcType=VARCHAR}
+    where t_staffrole_id = #{tStaffroleId,jdbcType=INTEGER}
+  </update>
+</mapper>

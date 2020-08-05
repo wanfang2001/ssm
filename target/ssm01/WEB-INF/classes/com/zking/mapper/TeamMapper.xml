@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.TeamMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Team" >
+    <constructor >
+      <idArg column="t_team_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_team_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_team_id, t_team_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jz_team
+    where t_team_id = #{tTeamId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jz_team
+    where t_team_id = #{tTeamId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Team" >
+    insert into t_jz_team (t_team_id, t_team_name)
+    values (#{tTeamId,jdbcType=INTEGER}, #{tTeamName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Team" >
+    insert into t_jz_team
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tTeamId != null" >
+        t_team_id,
+      </if>
+      <if test="tTeamName != null" >
+        t_team_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tTeamId != null" >
+        #{tTeamId,jdbcType=INTEGER},
+      </if>
+      <if test="tTeamName != null" >
+        #{tTeamName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Team" >
+    update t_jz_team
+    <set >
+      <if test="tTeamName != null" >
+        t_team_name = #{tTeamName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_team_id = #{tTeamId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Team" >
+    update t_jz_team
+    set t_team_name = #{tTeamName,jdbcType=VARCHAR}
+    where t_team_id = #{tTeamId,jdbcType=INTEGER}
+  </update>
+</mapper>

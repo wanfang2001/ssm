@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.UsersMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.UsersMessage" >
+    <constructor >
+      <idArg column="t_um_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_users_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_message_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_um_id, t_users_id, t_message_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_users_message
+    where t_um_id = #{tUmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_users_message
+    where t_um_id = #{tUmId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.UsersMessage" >
+    insert into t_users_message (t_um_id, t_users_id, t_message_id
+      )
+    values (#{tUmId,jdbcType=INTEGER}, #{tUsersId,jdbcType=INTEGER}, #{tMessageId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.UsersMessage" >
+    insert into t_users_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tUmId != null" >
+        t_um_id,
+      </if>
+      <if test="tUsersId != null" >
+        t_users_id,
+      </if>
+      <if test="tMessageId != null" >
+        t_message_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tUmId != null" >
+        #{tUmId,jdbcType=INTEGER},
+      </if>
+      <if test="tUsersId != null" >
+        #{tUsersId,jdbcType=INTEGER},
+      </if>
+      <if test="tMessageId != null" >
+        #{tMessageId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.UsersMessage" >
+    update t_users_message
+    <set >
+      <if test="tUsersId != null" >
+        t_users_id = #{tUsersId,jdbcType=INTEGER},
+      </if>
+      <if test="tMessageId != null" >
+        t_message_id = #{tMessageId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where t_um_id = #{tUmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.UsersMessage" >
+    update t_users_message
+    set t_users_id = #{tUsersId,jdbcType=INTEGER},
+      t_message_id = #{tMessageId,jdbcType=INTEGER}
+    where t_um_id = #{tUmId,jdbcType=INTEGER}
+  </update>
+</mapper>

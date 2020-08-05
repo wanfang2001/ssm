@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Message" >
+    <constructor >
+      <idArg column="t_message_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_message_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_message_createdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    t_message_id, t_message_content, t_message_createdate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jz_message
+    where t_message_id = #{tMessageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jz_message
+    where t_message_id = #{tMessageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.Message" >
+    insert into t_jz_message (t_message_id, t_message_content, t_message_createdate
+      )
+    values (#{tMessageId,jdbcType=INTEGER}, #{tMessageContent,jdbcType=VARCHAR}, #{tMessageCreatedate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.Message" >
+    insert into t_jz_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tMessageId != null" >
+        t_message_id,
+      </if>
+      <if test="tMessageContent != null" >
+        t_message_content,
+      </if>
+      <if test="tMessageCreatedate != null" >
+        t_message_createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tMessageId != null" >
+        #{tMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="tMessageContent != null" >
+        #{tMessageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tMessageCreatedate != null" >
+        #{tMessageCreatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.Message" >
+    update t_jz_message
+    <set >
+      <if test="tMessageContent != null" >
+        t_message_content = #{tMessageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tMessageCreatedate != null" >
+        t_message_createdate = #{tMessageCreatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where t_message_id = #{tMessageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Message" >
+    update t_jz_message
+    set t_message_content = #{tMessageContent,jdbcType=VARCHAR},
+      t_message_createdate = #{tMessageCreatedate,jdbcType=TIMESTAMP}
+    where t_message_id = #{tMessageId,jdbcType=INTEGER}
+  </update>
+</mapper>

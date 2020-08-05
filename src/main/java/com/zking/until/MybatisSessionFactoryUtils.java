@@ -3,8 +3,6 @@ package com.zking.until;
 import java.io.InputStream;
 import java.util.List;
 
-import com.zking.mapper.BookMapper;
-import com.zking.model.Book;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -47,14 +45,14 @@ public class MybatisSessionFactoryUtils {
 	}
 	
 	public static void main(String[] args) {
-		SqlSession sqlSession = MybatisSessionFactoryUtils.openSession();
+	/*	SqlSession sqlSession = MybatisSessionFactoryUtils.openSession();
 		System.out.println(sqlSession);
 		System.out.println(sqlSession.getConnection());
 		//通过sqlsession获取自动生成mybatis生成的接口
 		BookMapper mapper = sqlSession.getMapper(BookMapper.class);
 		List<Book> list = mapper.list(null);
 		System.out.println(list);
-		MybatisSessionFactoryUtils.closeSession();
+		MybatisSessionFactoryUtils.closeSession();*/
 	}
 
 }
