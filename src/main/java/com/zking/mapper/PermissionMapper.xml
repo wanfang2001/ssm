@@ -14,19 +14,35 @@
     t_per_id, t_per_name, t_pid, t_per_permission, t_url
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_jz_permission
     where t_per_id = #{tPerId,jdbcType=INTEGER}
   </select>
+  <select id="queryrootNode" resultMap="BaseResultMap">
+         select  <include refid="Base_Column_List"/>
+         from t_jz_permission where t_pid=-1
+
+  </select>
+  <select id="queryModelByPid">
+    select <include refid="Base_Column_List"/>
+    from  t_jz_permission where t_pid=#{tPid}
+
+  </select>
+  <select id="queryModuleByperid" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from t_jz_permission where t_pid=#{tPid}
+
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_jz_permission
     where t_per_id = #{tPerId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zking.model.Permission" >
-    insert into t_jz_permission (t_per_id, t_per_name, t_pid, 
+    insert into t_jz_permission (t_per_id, t_per_name, t_pid,
       t_per_permission, t_url)
-    values (#{tPerId,jdbcType=INTEGER}, #{tPerName,jdbcType=VARCHAR}, #{tPid,jdbcType=INTEGER}, 
+    values (#{tPerId,jdbcType=INTEGER}, #{tPerName,jdbcType=VARCHAR}, #{tPid,jdbcType=INTEGER},
       #{tPerPermission,jdbcType=VARCHAR}, #{tUrl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zking.model.Permission" >

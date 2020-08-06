@@ -1,5 +1,8 @@
 package com.zking.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Permission {
     private Integer tPerId;
 
@@ -11,7 +14,20 @@ public class Permission {
 
     private String tUrl;
 
-    public Permission(Integer tPerId, String tPerName, Integer tPid, String tPerPermission, String tUrl) {
+    /**
+     * 子节点
+     */
+    private List<Permission>  children = new ArrayList<Permission>();
+
+  public List<Permission> getChildren() {
+    return children;
+  }
+
+  public void setChildren(List<Permission> children) {
+    this.children = children;
+  }
+
+  public Permission(Integer tPerId, String tPerName, Integer tPid, String tPerPermission, String tUrl) {
         this.tPerId = tPerId;
         this.tPerName = tPerName;
         this.tPid = tPid;

@@ -9,21 +9,25 @@
       <arg column="t_users_sale" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="t_users_createdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="t_users_zt" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="t_users_sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_users_tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_users_addrs" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
-
   <sql id="Base_Column_List" >
-    t_users_id, t_users_name, t_users_password, t_users_sale, t_users_createdate, t_users_zt
+    t_users_id, t_users_name, t_users_password, t_users_sale, t_users_createdate, t_users_zt,
+    t_users_sex, t_users_tel, t_users_addrs
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_jz_users
     where t_users_id = #{tUsersId,jdbcType=INTEGER}
   </select>
-  <select id="userLogin" resultType="com.zking.model.Users">
-      select <include refid="Base_Column_List"/>
-      from t_jz_users where tUsersName=#{tUsersName}
+
+  <select id="userLogin" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from t_jz_users where t_users_name=#{tUsersName}
 
   </select>
   <select id="findRole" resultType="java.lang.String">
@@ -46,11 +50,13 @@
     where t_users_id = #{tUsersId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zking.model.Users" >
-    insert into t_jz_users (t_users_id, t_users_name, t_users_password, 
-      t_users_sale, t_users_createdate, t_users_zt
+    insert into t_jz_users (t_users_id, t_users_name, t_users_password,
+      t_users_sale, t_users_createdate, t_users_zt,
+      t_users_sex, t_users_tel, t_users_addrs
       )
-    values (#{tUsersId,jdbcType=INTEGER}, #{tUsersName,jdbcType=VARCHAR}, #{tUsersPassword,jdbcType=VARCHAR}, 
-      #{tUsersSale,jdbcType=VARCHAR}, #{tUsersCreatedate,jdbcType=TIMESTAMP}, #{tUsersZt,jdbcType=INTEGER}
+    values (#{tUsersId,jdbcType=INTEGER}, #{tUsersName,jdbcType=VARCHAR}, #{tUsersPassword,jdbcType=VARCHAR},
+      #{tUsersSale,jdbcType=VARCHAR}, #{tUsersCreatedate,jdbcType=TIMESTAMP}, #{tUsersZt,jdbcType=INTEGER},
+      #{tUsersSex,jdbcType=VARCHAR}, #{tUsersTel,jdbcType=VARCHAR}, #{tUsersAddrs,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zking.model.Users" >
@@ -74,6 +80,15 @@
       <if test="tUsersZt != null" >
         t_users_zt,
       </if>
+      <if test="tUsersSex != null" >
+        t_users_sex,
+      </if>
+      <if test="tUsersTel != null" >
+        t_users_tel,
+      </if>
+      <if test="tUsersAddrs != null" >
+        t_users_addrs,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tUsersId != null" >
@@ -93,6 +108,15 @@
       </if>
       <if test="tUsersZt != null" >
         #{tUsersZt,jdbcType=INTEGER},
+      </if>
+      <if test="tUsersSex != null" >
+        #{tUsersSex,jdbcType=VARCHAR},
+      </if>
+      <if test="tUsersTel != null" >
+        #{tUsersTel,jdbcType=VARCHAR},
+      </if>
+      <if test="tUsersAddrs != null" >
+        #{tUsersAddrs,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -114,6 +138,15 @@
       <if test="tUsersZt != null" >
         t_users_zt = #{tUsersZt,jdbcType=INTEGER},
       </if>
+      <if test="tUsersSex != null" >
+        t_users_sex = #{tUsersSex,jdbcType=VARCHAR},
+      </if>
+      <if test="tUsersTel != null" >
+        t_users_tel = #{tUsersTel,jdbcType=VARCHAR},
+      </if>
+      <if test="tUsersAddrs != null" >
+        t_users_addrs = #{tUsersAddrs,jdbcType=VARCHAR},
+      </if>
     </set>
     where t_users_id = #{tUsersId,jdbcType=INTEGER}
   </update>
@@ -123,7 +156,10 @@
       t_users_password = #{tUsersPassword,jdbcType=VARCHAR},
       t_users_sale = #{tUsersSale,jdbcType=VARCHAR},
       t_users_createdate = #{tUsersCreatedate,jdbcType=TIMESTAMP},
-      t_users_zt = #{tUsersZt,jdbcType=INTEGER}
+      t_users_zt = #{tUsersZt,jdbcType=INTEGER},
+      t_users_sex = #{tUsersSex,jdbcType=VARCHAR},
+      t_users_tel = #{tUsersTel,jdbcType=VARCHAR},
+      t_users_addrs = #{tUsersAddrs,jdbcType=VARCHAR}
     where t_users_id = #{tUsersId,jdbcType=INTEGER}
   </update>
 </mapper>

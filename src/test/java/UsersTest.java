@@ -2,10 +2,12 @@ import com.zking.model.Users;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.junit.Test;
 import org.springframework.ui.Model;
 
 public class UsersTest {
 
+    @Test
     public String userLogin(Users users, Model model) {
         //拿到shiro的主体对象
         Subject subject = SecurityUtils.getSubject();

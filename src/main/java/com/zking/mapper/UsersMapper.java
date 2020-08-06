@@ -1,11 +1,11 @@
 package com.zking.mapper;
 
 import com.zking.model.Users;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
-@Repository
+
+@Transactional
 public interface UsersMapper {
     int deleteByPrimaryKey(Integer tUsersId);
 
@@ -19,30 +19,18 @@ public interface UsersMapper {
 
     int updateByPrimaryKey(Users record);
 
-    /**
-     * 用户登录
-     * @param tUsersName
-     * @return
-     */
-    Users userLogin(@Param("tUsersName") String tUsersName);
-
-    /**
-     * 获取用户获取的角色名
-     * @param tUsersName
-     * @return
-     */
-    Set<String>  findRole(@Param("tUsersName") String tUsersName);
+  @Transactional(readOnly = true)
+  Users userLogin(String tUsersName);
 
 
 
 
-    /**
-     * 获取用户的权限
-     * @param tUsersName
-     * @return
-     */
+  @Transactional(readOnly = true)
+  Set<String> findRole(String username);
 
-    Set<String> findPermission(@Param("tUsersName") String tUsersName);
+  @Transactional(readOnly = true)
+  Set<String> findPermission(String tUsersName);
+
 
 
 

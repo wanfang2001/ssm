@@ -15,13 +15,22 @@ public class Users {
 
     private Integer tUsersZt;
 
-    public Users(Integer tUsersId, String tUsersName, String tUsersPassword, String tUsersSale, Date tUsersCreatedate, Integer tUsersZt) {
+    private String tUsersSex;
+
+    private String tUsersTel;
+
+    private String tUsersAddrs;
+
+    public Users(Integer tUsersId, String tUsersName, String tUsersPassword, String tUsersSale, Date tUsersCreatedate, Integer tUsersZt, String tUsersSex, String tUsersTel, String tUsersAddrs) {
         this.tUsersId = tUsersId;
         this.tUsersName = tUsersName;
         this.tUsersPassword = tUsersPassword;
         this.tUsersSale = tUsersSale;
         this.tUsersCreatedate = tUsersCreatedate;
         this.tUsersZt = tUsersZt;
+        this.tUsersSex = tUsersSex;
+        this.tUsersTel = tUsersTel;
+        this.tUsersAddrs = tUsersAddrs;
     }
 
     public Users() {
@@ -74,5 +83,29 @@ public class Users {
 
     public void settUsersZt(Integer tUsersZt) {
         this.tUsersZt = tUsersZt;
+    }
+
+    public String gettUsersSex() {
+        return tUsersSex;
+    }
+
+    public void settUsersSex(String tUsersSex) {
+        this.tUsersSex = tUsersSex;
+    }
+
+    public String gettUsersTel() {
+        return tUsersTel;
+    }
+
+    public void settUsersTel(String tUsersTel) {
+        this.tUsersTel = tUsersTel;
+    }
+
+    public String gettUsersAddrs() {
+        return tUsersAddrs;
+    }
+
+    public void settUsersAddrs(String tUsersAddrs) {
+        this.tUsersAddrs = tUsersAddrs;
     }
 }
